@@ -1,0 +1,2 @@
+# KeyStroker
+ Automate keypresses
