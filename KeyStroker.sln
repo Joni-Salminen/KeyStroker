@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyStroker.UI", "KeyStroker.UserInterface\KeyStroker.UI.csproj", "{79B00D93-EFBC-420F-ABF0-3F8FA4B77F18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyStroker.UI", "KeyStroker.UserInterface\KeyStroker.UI.csproj", "{79B00D93-EFBC-420F-ABF0-3F8FA4B77F18}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyStroker.Logic", "KeyStroker.Logic\KeyStroker.Logic.csproj", "{05770343-E758-4E85-B701-72B16DB32079}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyStroker.LogicTests", "KeyStroker.LogicTests\KeyStroker.LogicTests.csproj", "{1CDE5F42-C84E-4746-8B89-5104F101C5A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{05770343-E758-4E85-B701-72B16DB32079}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05770343-E758-4E85-B701-72B16DB32079}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05770343-E758-4E85-B701-72B16DB32079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CDE5F42-C84E-4746-8B89-5104F101C5A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CDE5F42-C84E-4746-8B89-5104F101C5A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CDE5F42-C84E-4746-8B89-5104F101C5A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CDE5F42-C84E-4746-8B89-5104F101C5A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

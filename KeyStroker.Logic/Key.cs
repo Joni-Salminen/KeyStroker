@@ -1,36 +1,50 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Timers;
 
 namespace KeyStroker.Logic
 {
     public class Key
     {
-        public Key(char key)
+        public Key(char key, double time)
         {
+            timer = new Timer(time);
+
             _button = key;
+            _time = time;
+
+            timer.Elapsed += Timer_Elapsed;
+
+            timer.Interval = time;
+            timer.AutoReset = true;
         }
 
         // Key to send
         private char _button;
         // Interval to send the key
-        private string _time;
-        // Last time key was sent
-        private string _lastSent;
-        
-        public char Button { get => _button; private set { } }
-        public string Time { get { return _time; } set { _time = value; } }
-        public string LastSent { get => _lastSent; private set { } }
-        
-        // Send Key and also set time when the key was sent last time
-        public void SendThis()
+        private double _time;
+        // Is timer running
+        private bool _timerRunning = false;
+
+        Timer timer;
+
+        public char Button { get { return _button; } private set { } }
+        public double Time { get { return _time; } set { _time = value; timer.Interval = value; } }
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             SendKeysWrapper.SendSingleKey(_button);
-            _lastSent = DateTime.Now.ToString("hh.mm.ss.ffffff");
         }
-
-        // Perhaps build some date string compare to check if lastTime compared to DateTime.Now > _time
-        public bool ShouldSend()
+        public void StartTimer() 
+        { 
+            timer.Start();
+            _timerRunning = true;
+        }
+        public void StopTimer()
         {
-            return false;
+            timer.Stop();
+            _timerRunning = false;
         }
+        public bool TimerRunning() => _timerRunning;
     }
 }
