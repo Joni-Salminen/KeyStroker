@@ -25,11 +25,21 @@ namespace KeyStroker.Logic
         private double _time;
         // Is timer running
         private bool _timerRunning = false;
+        // Is this key action enabled
+        private bool _isEnabled = true;
 
         Timer timer;
 
         public char Button { get { return _button; } private set { } }
         public double Time { get { return _time; } set { _time = value; timer.Interval = value; } }
+        public bool IsEnabled { get { return _isEnabled; } 
+            set 
+            {
+                _isEnabled = value;
+                if (_timerRunning && value == false)
+                    timer.Stop();
+            } 
+        }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -37,8 +47,11 @@ namespace KeyStroker.Logic
         }
         public void StartTimer() 
         { 
-            timer.Start();
-            _timerRunning = true;
+            if(_isEnabled)
+            { 
+                timer.Start();
+                _timerRunning = true;
+            }
         }
         public void StopTimer()
         {
@@ -46,5 +59,9 @@ namespace KeyStroker.Logic
             _timerRunning = false;
         }
         public bool TimerRunning() => _timerRunning;
+        public override string ToString()
+        {
+            return String.Format($"Time:{_time} Key:{_button} IsEnabled:{_isEnabled}");
+        }
     }
 }
