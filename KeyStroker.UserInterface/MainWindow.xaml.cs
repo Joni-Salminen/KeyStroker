@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using MahApps.Metro.Controls;
 
-namespace KeyStroker.UserInterface
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
+namespace KeyStroker.UI {
+ 
+    public partial class MainWindow : MetroWindow {
+        public MainWindow() {
             InitializeComponent();
+            HamburgerMenu.SelectedIndex = 0;
         }
+
+        private void HamburgerMenu_ItemClick(object sender, MahApps.Metro.Controls.ItemClickEventArgs e)
+        {
+            // set the content
+            this.HamburgerMenu.Content = e.ClickedItem;
+            // close the pane
+            this.HamburgerMenu.IsPaneOpen = false;
+            //(DataContext as MainViewModel).HamburgerMenuIndex = e.ClickedItem;
+        }
+
+
     }
 }

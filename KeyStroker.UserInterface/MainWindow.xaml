@@ -1,12 +1,66 @@
-﻿<Window x:Class="KeyStroker.UserInterface.MainWindow"
+﻿<mah:MetroWindow x:Class="KeyStroker.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyStroker.UserInterface"
-        mc:Ignorable="d"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:Binding="clr-namespace:KeyStroker.UI.Utils"
+        xmlns:Tabs="clr-namespace:KeyStroker.UI.UserControls.Tabs"
+        xmlns:resx="clr-namespace:KeyStroker.UI.Properties"         
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
+    <mah:MetroWindow.Resources>
+        <Binding:BindingProxy x:Key="proxy" DataContext="{Binding}"/>
+    </mah:MetroWindow.Resources>
+
+    <Grid Margin="0">
+        <mah:HamburgerMenu HamburgerMargin="10" Foreground="White"  IsPaneOpen="False" x:Name="HamburgerMenu" CompactPaneLength="150" OpenPaneLength="150"
+                                ItemTemplate="{StaticResource ResourceKey=MenuItemTemplate}"
+                                OptionsItemTemplate="{StaticResource ResourceKey=MenuItemTemplate}"
+                                ContentTemplate="{StaticResource ResourceKey=ContentTemplate}"
+                                DisplayMode="CompactOverlay"
+                                Margin="0"
+                                SelectedIndex="{Binding HamburgerMenuIndex}"                                 
+                                ItemClick="HamburgerMenu_ItemClick"
+                                OptionsItemClick="HamburgerMenu_ItemClick">
+
+
+            <mah:HamburgerMenu.ItemsSource>
+                <mah:HamburgerMenuItemCollection>
+                    <!-- Home -->
+                    <mah:HamburgerMenuIconItem  Label="Home" x:Name="ChatMenuItem" Icon="{StaticResource ResourceKey=icon_home}">
+                        <mah:HamburgerMenuIconItem.Tag x:Uid="a">
+                            <Tabs:Home DataContext="{Binding DataContext.MainScreenVM, Source={StaticResource proxy}}" ></Tabs:Home>
+                        </mah:HamburgerMenuIconItem.Tag>
+                    </mah:HamburgerMenuIconItem>
+                    <!-- Keyboard -->
+                    <mah:HamburgerMenuIconItem Label="MacroMan" Icon="{StaticResource ResourceKey=icon_keyboard}">
+                        <mah:HamburgerMenuIconItem.Tag>
+                            <Tabs:MacroManager DataContext="{Binding DataContext.ProfileCreatorVM, Source={StaticResource proxy}}"></Tabs:MacroManager>
+                        </mah:HamburgerMenuIconItem.Tag>
+                    </mah:HamburgerMenuIconItem>
+                    <mah:HamburgerMenuIconItem Label="MacroMan" Icon="{StaticResource ResourceKey=icon_mouse}">
+                        <mah:HamburgerMenuIconItem.Tag>
+                            <Tabs:MacroManager DataContext="{Binding DataContext.ProfileCreatorVM, Source={StaticResource proxy}}"></Tabs:MacroManager>
+                        </mah:HamburgerMenuIconItem.Tag>
+                    </mah:HamburgerMenuIconItem>
+                </mah:HamburgerMenuItemCollection>
+            </mah:HamburgerMenu.ItemsSource>
+
+            <!--  Options  -->
+            <mah:HamburgerMenu.OptionsItemsSource>
+                <mah:HamburgerMenuItemCollection>
+                    <mah:HamburgerMenuIconItem   Label="Settings" Icon="{StaticResource ResourceKey=icon_settings}">
+                        <mah:HamburgerMenuIconItem.Tag>
+                            <Tabs:Settings DataContext="{Binding DataContext.AppSettingsVM, Source={StaticResource proxy}}"></Tabs:Settings>
+                        </mah:HamburgerMenuIconItem.Tag>
+                    </mah:HamburgerMenuIconItem>
+
+                </mah:HamburgerMenuItemCollection>
+            </mah:HamburgerMenu.OptionsItemsSource>
+        </mah:HamburgerMenu>
     </Grid>
-</Window>
+</mah:MetroWindow>
+
+
