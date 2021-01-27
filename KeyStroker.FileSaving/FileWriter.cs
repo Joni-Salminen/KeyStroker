@@ -10,10 +10,10 @@ namespace KeyStroker.FileSaving
 {
     public class FileWriter
     {
-        private static string _filePath = "";
+        private static string _filePath = "defaultProfile.txt";
 
         public static string SavePath { get { return _filePath; } set { _filePath = value; } }
-        public static async Task SaveFile(List<Key> keyList)
+        public static async Task<bool> SaveFile(List<Key> keyList)
         {
             string text = "";
 
@@ -22,12 +22,19 @@ namespace KeyStroker.FileSaving
                 text += key.ToString() + '\n';
             }
 
-            byte[] encodedText = Encoding.Unicode.GetBytes(text);
-
-            using (FileStream stream = new FileStream(_filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None, bufferSize: encodedText.Length, useAsync: true))
+            byte[] encodedText = Encoding.ASCII.GetBytes(text);
+            try
             {
-                await stream.WriteAsync(encodedText, 0, encodedText.Length);
-            };
+                using (FileStream stream = new FileStream(_filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None, bufferSize: encodedText.Length, useAsync: true))
+                {
+                    await stream.WriteAsync(encodedText, 0, encodedText.Length);
+                };
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         public static async Task<List<Key>> ReadFile()
         {
@@ -35,7 +42,8 @@ namespace KeyStroker.FileSaving
 
             using (StreamReader reader = File.OpenText(_filePath))
             {
-                keyList.Add(CalculateKey(await reader.ReadLineAsync()));
+                while(!reader.EndOfStream)
+                    keyList.Add(CalculateKey(await reader.ReadLineAsync()));
             };
             return keyList;
         }
