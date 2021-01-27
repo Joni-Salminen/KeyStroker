@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyStroker.Logic", "KeyStro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyStroker.LogicTests", "KeyStroker.LogicTests\KeyStroker.LogicTests.csproj", "{1CDE5F42-C84E-4746-8B89-5104F101C5A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyStroker.FileSaving", "KeyStroker.FileSaving\KeyStroker.FileSaving.csproj", "{DCFA3BF3-7845-406B-8E63-DE09B72DD7D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1CDE5F42-C84E-4746-8B89-5104F101C5A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CDE5F42-C84E-4746-8B89-5104F101C5A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CDE5F42-C84E-4746-8B89-5104F101C5A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCFA3BF3-7845-406B-8E63-DE09B72DD7D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCFA3BF3-7845-406B-8E63-DE09B72DD7D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCFA3BF3-7845-406B-8E63-DE09B72DD7D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCFA3BF3-7845-406B-8E63-DE09B72DD7D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

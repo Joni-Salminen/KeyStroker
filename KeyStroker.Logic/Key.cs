@@ -61,7 +61,7 @@ namespace KeyStroker.Logic
         public bool TimerRunning() => _timerRunning;
         public override string ToString()
         {
-            return String.Format($"Time:{_time} Key:{_button} IsEnabled:{_isEnabled}");
+            return String.Format($"{_time} {_button} {_isEnabled}");
         }
     }
 }
