@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1CDE5F42-C84E-4746-8B89-5104F101C5A9}</ProjectGuid>
+    <ProjectGuid>{540B038E-99C1-4DAC-9DE1-A42102C30207}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KeyStroker.LogicTests</RootNamespace>
-    <AssemblyName>KeyStroker.LogicTests</AssemblyName>
+    <RootNamespace>KeyStroker.FileSavingTests</RootNamespace>
+    <AssemblyName>KeyStroker.FileSavingTests</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,14 +49,17 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KeyClassTests.cs" />
-    <Compile Include="KeyControllerTests.cs" />
+    <Compile Include="FileSavingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KeyStroker.FileSaving\KeyStroker.FileSaving.csproj">
+      <Project>{dcfa3bf3-7845-406b-8e63-de09b72dd7d3}</Project>
+      <Name>KeyStroker.FileSaving</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KeyStroker.Logic\KeyStroker.Logic.csproj">
       <Project>{05770343-e758-4e85-b701-72b16db32079}</Project>
       <Name>KeyStroker.Logic</Name>

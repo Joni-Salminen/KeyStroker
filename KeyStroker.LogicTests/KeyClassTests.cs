@@ -5,7 +5,7 @@ using System;
 namespace KeyStroker.LogicTests
 {
     [TestClass]
-    public class KeyClassTest
+    public class KeyClassTests
     {
         [TestMethod]
         public void TimeAndButtonProperlySet()
