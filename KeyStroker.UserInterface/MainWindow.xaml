@@ -25,26 +25,30 @@
                                 ItemClick="HamburgerMenu_ItemClick"
                                 OptionsItemClick="HamburgerMenu_ItemClick">
 
-
             <mah:HamburgerMenu.ItemsSource>
                 <mah:HamburgerMenuItemCollection>
+                    
                     <!-- Home -->
                     <mah:HamburgerMenuIconItem  Label="Home" x:Name="ChatMenuItem" Icon="{StaticResource ResourceKey=icon_home}">
                         <mah:HamburgerMenuIconItem.Tag x:Uid="a">
-                            <Tabs:Home DataContext="{Binding DataContext.MainScreenVM, Source={StaticResource proxy}}" ></Tabs:Home>
+                            <Tabs:Home DataContext="{Binding DataContext.HomeVM, Source={StaticResource proxy}}" ></Tabs:Home>
                         </mah:HamburgerMenuIconItem.Tag>
                     </mah:HamburgerMenuIconItem>
-                    <!-- Keyboard -->
+
+                    <!-- Key Spammer -->
+                    <mah:HamburgerMenuIconItem Label="KeySpammer" Icon="{StaticResource ResourceKey=icon_keyboard}">
+                        <mah:HamburgerMenuIconItem.Tag>
+                            <Tabs:KeySpammer DataContext="{Binding DataContext.MacroManagerVM, Source={StaticResource proxy}}"></Tabs:KeySpammer>
+                        </mah:HamburgerMenuIconItem.Tag>
+                    </mah:HamburgerMenuIconItem>
+
+                    <!-- Macro Manager -->
                     <mah:HamburgerMenuIconItem Label="MacroMan" Icon="{StaticResource ResourceKey=icon_keyboard}">
                         <mah:HamburgerMenuIconItem.Tag>
-                            <Tabs:MacroManager DataContext="{Binding DataContext.ProfileCreatorVM, Source={StaticResource proxy}}"></Tabs:MacroManager>
+                            <Tabs:MacroManager DataContext="{Binding DataContext.MacroManagerVM, Source={StaticResource proxy}}"></Tabs:MacroManager>
                         </mah:HamburgerMenuIconItem.Tag>
                     </mah:HamburgerMenuIconItem>
-                    <mah:HamburgerMenuIconItem Label="MacroMan" Icon="{StaticResource ResourceKey=icon_mouse}">
-                        <mah:HamburgerMenuIconItem.Tag>
-                            <Tabs:MacroManager DataContext="{Binding DataContext.ProfileCreatorVM, Source={StaticResource proxy}}"></Tabs:MacroManager>
-                        </mah:HamburgerMenuIconItem.Tag>
-                    </mah:HamburgerMenuIconItem>
+                    
                 </mah:HamburgerMenuItemCollection>
             </mah:HamburgerMenu.ItemsSource>
 
@@ -56,9 +60,9 @@
                             <Tabs:Settings DataContext="{Binding DataContext.AppSettingsVM, Source={StaticResource proxy}}"></Tabs:Settings>
                         </mah:HamburgerMenuIconItem.Tag>
                     </mah:HamburgerMenuIconItem>
-
                 </mah:HamburgerMenuItemCollection>
             </mah:HamburgerMenu.OptionsItemsSource>
+            
         </mah:HamburgerMenu>
     </Grid>
 </mah:MetroWindow>

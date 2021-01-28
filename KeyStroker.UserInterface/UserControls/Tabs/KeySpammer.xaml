@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="KeyStroker.UI.UserControls.Tabs.KeySpammer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KeyStroker.UI.UserControls.Tabs"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}" >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="83*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Margin="10,10,10,10" Grid.RowSpan="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Key" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Key Code" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Interval" Width="1*"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Enabled" Width="1*"></DataGridCheckBoxColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBox Text="{Binding ReadableBtn}" md:HintAssist.Hint="Key" TextWrapping="Wrap"
+                 Margin="10,10,10,10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" />
+        <Slider x:Name="msSLider" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Center"  Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <CheckBox Content="Enabled?" Margin="10,9,10,210" HorizontalContentAlignment="Right" Grid.Column="3"  Grid.Row="4"/>
+        <Label Content="{Binding m}" Width="60" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="2"  Grid.Column="3"/>
+        <TextBox Text="{Binding RepeatAmount}" md:HintAssist.Hint="Repeat amount (0 is infinity times)"  TextWrapping="Wrap"
+                 Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="153" Grid.ColumnSpan="2"/>
+        <Button Content="Set" Grid.Column="3" Margin="10,0,7,0" Grid.Row="1" VerticalAlignment="Center"/>
+        <CheckBox Content="Forever" Grid.Column="3" Margin="10,16,10,17" Grid.Row="3"/>
+
+    </Grid>
+</UserControl>

@@ -31,6 +31,7 @@
                 <RowDefinition Height="48" />
                 <RowDefinition />
             </Grid.RowDefinitions>
+            
             <Border Grid.Row="0"
                     Background="#FF444444">
                 <TextBlock x:Name="Header"
@@ -40,11 +41,16 @@
                             Foreground="White"
                             Text="{Binding Label}" />
             </Border>
+            <ComboBox Name="a" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" Width="200" ItemsSource="{Binding Profiles}"></ComboBox>
+            
             <ContentControl x:Name="TheContent"
                             Grid.Row="1"
                             Focusable="False"
                             Foreground="{DynamicResource BlackBrush}"
                             Content="{Binding Tag}" />
+
+            
+            
         </Grid>
     </DataTemplate>
 
