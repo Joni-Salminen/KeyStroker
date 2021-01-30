@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Timers;
 using System.Windows.Input;
 
@@ -8,10 +7,15 @@ namespace KeyStroker.Logic
     public class ProgrammableButton
     {
 
-        public Key key { get; set; } =
-        private bool enabled = true;
-        private long repeatAmount = 0;  /* 0 == Infinite */
-        private long interval = 100;
+        #region UI uses these indirectly
+        public Key KeyCode { get; set; } = Key.None;
+        public bool IsEnabled { get; set; } = true;
+        public long RepeatAmount { get; set; } = 0;
+        public long Interval { get; set; } = 100;
+        #endregion
+
+        /* Empty constructor */
+        public ProgrammableButton() { }
 
         public ProgrammableButton(char key, double time)
         {
@@ -39,7 +43,9 @@ namespace KeyStroker.Logic
 
         public char Button { get { return _button; } private set { } }
         public double Time { get { return _time; } set { _time = value; timer.Interval = value; } }
-        public bool IsEnabled { get { return _isEnabled; } 
+        
+        public bool IsTimerEnabled
+            { get { return _isEnabled; } 
             set 
             {
                 _isEnabled = value;
