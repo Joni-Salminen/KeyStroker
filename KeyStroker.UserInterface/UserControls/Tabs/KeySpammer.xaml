@@ -32,36 +32,36 @@
             <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <!-- Button grid -->
-        <DataGrid Margin="10,10,10,10" Grid.RowSpan="5" ItemsSource="{Binding Buttons, NotifyOnSourceUpdated=True}" SelectedItem="{Binding SelectedButton}" AutoGenerateColumns="False">
+        <DataGrid Margin="10,10,10,10" Grid.RowSpan="5" ItemsSource="{Binding Buttons, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedButton}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Key" Binding="{Binding KeyCode}" Width="1*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Interval" Binding="{Binding Interval}" Width="1*"></DataGridTextColumn>
-                <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding Enabled}" Width="1*"></DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="Key" Binding="{Binding KeyCodeStr}" IsReadOnly="True" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Interval" Binding="{Binding Interval}" IsReadOnly="True" Width="1*"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding IsEnabled}" IsReadOnly="False" Width="1*"></DataGridCheckBoxColumn>
             </DataGrid.Columns>
         </DataGrid>
 
         <!-- Button to spam, in human readable form -->
-        <TextBox Text="{Binding EditableButton.KeyCode}" md:HintAssist.Hint="Key" md:HintAssist.IsFloating="True" md:HintAssist.HelperText="Key to spam" TextWrapping="Wrap"
+        <TextBox Text="{Binding SelectedButton.KeyCodeStr, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Key" md:HintAssist.IsFloating="True" md:HintAssist.HelperText="Key to spam" TextWrapping="Wrap"
                  Margin="10,0,10,10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" />
         
         <!-- Interval slider & label -->
-        <Slider x:Name="msSLider" Value="{Binding EditableButton.Interval}"  TickFrequency="{Binding TickFreq}" Minimum="{Binding Min}" Maximum="{Binding Max}" 
+        <Slider x:Name="msSLider" Value="{Binding SelectedButton.Interval, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  TickFrequency="5" Minimum="0" Maximum="10000" 
                 Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
 
         <Label Content="{Binding ms}"
                Margin="10,0,10,0" VerticalAlignment="Center" Height="24" Grid.Row="2"  Grid.Column="3"/>
 
         <!-- Is the button spammer enabled for this button -->
-        <CheckBox x:Name="EnabledTick" IsChecked="{Binding EditableButton.IsEnabled}" Content="Enabled"
+        <CheckBox x:Name="EnabledTick" IsChecked="{Binding SelectedButton.IsEnabled, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Content="Enabled"
                   Margin="10,10,10,0"  Grid.Column="3"  Grid.Row="4" Height="31" VerticalAlignment="Top"/>
 
-        <TextBox Text="{Binding RepeatAmount}" md:HintAssist.Hint="Repeat amount" md:HintAssist.IsFloating="True" md:HintAssist.HelperText="The amount of times to repeat the action" TextWrapping="Wrap"
-                 IsEnabled="{Binding ElementName=EnabledTick, Path=IsChecked}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Top" Margin="10,0,10,0" Grid.ColumnSpan="2" Height="40"/>
+        <TextBox Text="{Binding SelectedButton.RepeatAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Repeat amount" md:HintAssist.IsFloating="True" md:HintAssist.HelperText="The amount of times to repeat the action" TextWrapping="Wrap"
+                 Grid.Column="1" Grid.Row="3" VerticalAlignment="Top" Margin="10,0,10,0" Grid.ColumnSpan="2" Height="40"/>
 
-        <Button Content="Set" Command="{Binding SetKey}"
+        <Button Content="Set" Command="{Binding SetNewKey}"
                 Margin="10" Grid.Column="3"  Grid.Row="1" VerticalAlignment="Center"/>
 
-        <CheckBox Content="Infinitely" IsChecked="{Binding EditableButton.InfinityTimes}"
+        <CheckBox Content="Infinitely" IsChecked="{Binding SelectedButton.InfinityTimes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   Margin="10"  Grid.Column="3" Grid.Row="3"/>
 
     </Grid>

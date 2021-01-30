@@ -12,8 +12,8 @@ namespace KeyStroker.UI.Viewmodels
         private ButtonViewmodel _selButton;
         private ButtonViewmodel _editableButton;
 
-        public BindingList<ButtonViewmodel> Buttons { get => _keys; private set { _keys = value; } }
-        public ButtonViewmodel SelectedButton { get => _selButton; set { _selButton = value; NotifyPropertyChanged(); }}
+        public BindingList<ButtonViewmodel> Buttons { get => _keys; set { _keys = value; } }
+        public ButtonViewmodel SelectedButton { get => _selButton; set { _selButton = value; EditableButton = _selButton; NotifyPropertyChanged(); }}
         public ButtonViewmodel EditableButton { get => _editableButton; set { _editableButton = value; NotifyPropertyChanged(); }}
 
         #region Commands
@@ -54,13 +54,19 @@ namespace KeyStroker.UI.Viewmodels
 
         private void InitKeyList() {
             /* Init keys to avoid NullExpection */
-            _keys = new BindingList<ButtonViewmodel>();        
-            /* Allow all changes to the list */
-            _keys.AllowRemove = true;
-            _keys.AllowNew = true;
-            _keys.AllowEdit = true;
+            _keys = new BindingList<ButtonViewmodel> {
+                /* Allow all changes to the list */
+                AllowRemove = true,
+                AllowNew = true,
+                AllowEdit = true
+            };
             /* Register for list changed events */
             _keys.ListChanged += KeysChangedEvent;
+
+            Buttons.Add(new ButtonViewmodel(System.Windows.Input.Key.Enter, false, 100, 10));
+            Buttons.Add(new ButtonViewmodel(System.Windows.Input.Key.A, true, 300, 9999999));
+            Buttons.Add(new ButtonViewmodel(System.Windows.Input.Key.C, false, 400, 8));
+            
         }
 
         public void StartRecordingKeyPresses() {

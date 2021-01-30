@@ -6,13 +6,17 @@ namespace KeyStroker.UI.Viewmodels {
     /* Represents UserDefined Key to UI */
     public class ButtonViewmodel : BaseViewmodel {
 
+        /* These should come from the datamodel */
         private Key key;
-        private bool infiniteTimes = true;
+        private bool infiniteTimes = false;
         private bool enabled = true;
         private long repeatAmount = 0;
         private long interval = 100;
 
         /* The Button we are focusing on */
+
+        public string KeyCodeStr { get => key.ToString(); set { } }
+
         public Key KeyCode {
             get => key;
             set {
@@ -20,7 +24,6 @@ namespace KeyStroker.UI.Viewmodels {
                 NotifyPropertyChanged();
             }
         }
-
         public long Interval { get => interval; set { interval = value; NotifyPropertyChanged(); } }
         public bool IsEnabled { get => enabled; set { enabled = value; NotifyPropertyChanged(); } }
         public bool InfinityTimes { get => infiniteTimes; set { infiniteTimes = value; NotifyPropertyChanged(); } }
@@ -28,10 +31,11 @@ namespace KeyStroker.UI.Viewmodels {
 
         public ButtonViewmodel() {}
 
-        public ButtonViewmodel(Key keyCode, bool enabled, long repeatAmount) {
+        public ButtonViewmodel(Key keyCode, bool enabled, long interval, long repeatAmount) {
             this.KeyCode = keyCode;
             this.IsEnabled = enabled;
             this.RepeatAmount = repeatAmount;
+            this.Interval = interval;
             if (RepeatAmount == 0) {
                 InfinityTimes = true;
             }

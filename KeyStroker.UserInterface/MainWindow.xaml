@@ -20,8 +20,7 @@
                                 OptionsItemTemplate="{StaticResource ResourceKey=MenuItemTemplate}"
                                 ContentTemplate="{StaticResource ResourceKey=ContentTemplate}"
                                 DisplayMode="CompactOverlay"
-                                Margin="0"
-                                SelectedIndex="{Binding HamburgerMenuIndex}"                                 
+                                Margin="0"                                
                                 ItemClick="HamburgerMenu_ItemClick"
                                 OptionsItemClick="HamburgerMenu_ItemClick">
 
@@ -31,7 +30,7 @@
                     <!-- Home -->
                     <mah:HamburgerMenuIconItem  Label="Home" x:Name="ChatMenuItem" Icon="{StaticResource ResourceKey=icon_home}">
                         <mah:HamburgerMenuIconItem.Tag x:Uid="a">
-                            <Tabs:Home DataContext="{Binding DataContext.HomeVM, Source={StaticResource proxy}}" ></Tabs:Home>
+                            <Tabs:Home ></Tabs:Home>
                         </mah:HamburgerMenuIconItem.Tag>
                     </mah:HamburgerMenuIconItem>
 
@@ -45,7 +44,7 @@
                     <!-- Macro Manager -->
                     <mah:HamburgerMenuIconItem Label="MacroMan" Icon="{StaticResource ResourceKey=icon_keyboard}">
                         <mah:HamburgerMenuIconItem.Tag>
-                            <Tabs:MacroManager DataContext="{Binding DataContext.MacroManagerVM, Source={StaticResource proxy}}"></Tabs:MacroManager>
+                            <Tabs:MacroManager></Tabs:MacroManager>
                         </mah:HamburgerMenuIconItem.Tag>
                     </mah:HamburgerMenuIconItem>
                     
@@ -57,7 +56,7 @@
                 <mah:HamburgerMenuItemCollection>
                     <mah:HamburgerMenuIconItem   Label="Settings" Icon="{StaticResource ResourceKey=icon_settings}">
                         <mah:HamburgerMenuIconItem.Tag>
-                            <Tabs:Settings DataContext="{Binding DataContext.AppSettingsVM, Source={StaticResource proxy}}"></Tabs:Settings>
+                            <Tabs:Settings></Tabs:Settings>
                         </mah:HamburgerMenuIconItem.Tag>
                     </mah:HamburgerMenuIconItem>
                 </mah:HamburgerMenuItemCollection>
