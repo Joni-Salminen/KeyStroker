@@ -12,7 +12,8 @@
              TextElement.FontWeight="Medium"
              TextElement.FontSize="13"
              TextOptions.TextFormattingMode="Ideal" 
-             TextOptions.TextRenderingMode="Auto"        
+             TextOptions.TextRenderingMode="Auto"     
+             Foreground="Black"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}" >
 
@@ -21,7 +22,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="17*"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="83*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -30,24 +31,38 @@
             <ColumnDefinition Width="125"/>
             <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Margin="10,10,10,10" Grid.RowSpan="5">
+        <!-- Button grid -->
+        <DataGrid Margin="10,10,10,10" Grid.RowSpan="5" ItemsSource="{Binding Buttons, NotifyOnSourceUpdated=True}" SelectedItem="{Binding SelectedButton}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Key" Width="1*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Key Code" Width="1*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Interval" Width="1*"></DataGridTextColumn>
-                <DataGridCheckBoxColumn Header="Enabled" Width="1*"></DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="Key" Binding="{Binding KeyCode}" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Interval" Binding="{Binding Interval}" Width="1*"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding Enabled}" Width="1*"></DataGridCheckBoxColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBox Text="{Binding ReadableBtn}" md:HintAssist.Hint="Key" TextWrapping="Wrap"
-                 Margin="10,10,10,10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" />
-        <Slider x:Name="msSLider" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Center"  Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <CheckBox Content="Enabled?" Margin="10,9,10,210" HorizontalContentAlignment="Right" Grid.Column="3"  Grid.Row="4"/>
-        <Label Content="{Binding m}" Width="60" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="2"  Grid.Column="3"/>
-        <TextBox Text="{Binding RepeatAmount}" md:HintAssist.Hint="Repeat amount (0 is infinity times)"  TextWrapping="Wrap"
-                 Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="153" Grid.ColumnSpan="2"/>
-        <Button Content="Set" Grid.Column="3" Margin="10,0,7,0" Grid.Row="1" VerticalAlignment="Center"/>
-        <CheckBox Content="Forever" Grid.Column="3" Margin="10,16,10,17" Grid.Row="3"/>
+        <!-- Button to spam, in human readable form -->
+        <TextBox Text="{Binding EditableButton.KeyCode}" md:HintAssist.Hint="Key" md:HintAssist.IsFloating="True" md:HintAssist.HelperText="Key to spam" TextWrapping="Wrap"
+                 Margin="10,0,10,10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" />
+        
+        <!-- Interval slider & label -->
+        <Slider x:Name="msSLider" Value="{Binding EditableButton.Interval}"  TickFrequency="{Binding TickFreq}" Minimum="{Binding Min}" Maximum="{Binding Max}" 
+                Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
+
+        <Label Content="{Binding ms}"
+               Margin="10,0,10,0" VerticalAlignment="Center" Height="24" Grid.Row="2"  Grid.Column="3"/>
+
+        <!-- Is the button spammer enabled for this button -->
+        <CheckBox x:Name="EnabledTick" IsChecked="{Binding EditableButton.IsEnabled}" Content="Enabled"
+                  Margin="10,10,10,0"  Grid.Column="3"  Grid.Row="4" Height="31" VerticalAlignment="Top"/>
+
+        <TextBox Text="{Binding RepeatAmount}" md:HintAssist.Hint="Repeat amount" md:HintAssist.IsFloating="True" md:HintAssist.HelperText="The amount of times to repeat the action" TextWrapping="Wrap"
+                 IsEnabled="{Binding ElementName=EnabledTick, Path=IsChecked}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Top" Margin="10,0,10,0" Grid.ColumnSpan="2" Height="40"/>
+
+        <Button Content="Set" Command="{Binding SetKey}"
+                Margin="10" Grid.Column="3"  Grid.Row="1" VerticalAlignment="Center"/>
+
+        <CheckBox Content="Infinitely" IsChecked="{Binding EditableButton.InfinityTimes}"
+                  Margin="10"  Grid.Column="3" Grid.Row="3"/>
 
     </Grid>
 </UserControl>
