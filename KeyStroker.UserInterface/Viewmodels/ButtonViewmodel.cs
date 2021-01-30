@@ -1,4 +1,5 @@
-﻿using KeyStroker.UI.Utils;
+﻿using KeyStroker.Logic;
+using KeyStroker.UI.Utils;
 using System.Windows.Input;
 
 namespace KeyStroker.UI.Viewmodels {
@@ -6,24 +7,17 @@ namespace KeyStroker.UI.Viewmodels {
     /* Represents UserDefined Key to UI */
     public class ButtonViewmodel : BaseViewmodel {
 
-        /* These should come from the datamodel */
+        private ProgrammableButton btn = new ProgrammableButton();
         
-
         /* The Button we are focusing on */
 
-        public string KeyCodeStr { get => key.ToString(); set { } }
+        public string KeyCodeStr { get => btn.KeyCode.ToString(); set { } }
 
-        public Key KeyCode {
-            get => key;
-            set {
-                key = value;
-                NotifyPropertyChanged();
-            }
-        }
-        public long Interval { get => interval; set { interval = value; NotifyPropertyChanged(); } }
-        public bool IsEnabled { get => enabled; set { enabled = value; NotifyPropertyChanged(); } }
-        public bool InfinityTimes { get => infiniteTimes; set { infiniteTimes = value; NotifyPropertyChanged(); } }
-        public long RepeatAmount { get => repeatAmount; set { repeatAmount = value; NotifyPropertyChanged(); } }
+        public Key KeyCode {  get => btn.KeyCode; set { btn.KeyCode = value; NotifyPropertyChanged(); } }
+        public long Interval { get => btn.Interval; set { btn.Interval = value; NotifyPropertyChanged(); } }
+        public bool IsEnabled { get => btn.IsEnabled; set { btn.IsEnabled = value; NotifyPropertyChanged(); } }
+        public bool InfinityTimes { get => (btn.RepeatAmount == 0 ? true : false); set { NotifyPropertyChanged(); } }
+        public long RepeatAmount { get => btn.RepeatAmount; set { btn.RepeatAmount = value; NotifyPropertyChanged(); } }
 
         public ButtonViewmodel() {}
 
