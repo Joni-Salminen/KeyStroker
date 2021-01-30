@@ -1,15 +1,17 @@
 ﻿using KeyStroker.UI.Viewmodels;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace KeyStroker.UI {
 
     public partial class MainWindow : MetroWindow {
 
-        RootViewmodel model = new RootViewmodel();
+        RootViewmodel vm;
         public MainWindow() {
             InitializeComponent();
             HamburgerMenu.SelectedIndex = 0;
-            DataContext = model;
+            vm = new RootViewmodel(DialogCoordinator.Instance);
+            DataContext = vm;
         }
 
         private void HamburgerMenu_ItemClick(object sender, MahApps.Metro.Controls.ItemClickEventArgs e) {
@@ -20,6 +22,8 @@ namespace KeyStroker.UI {
             //(DataContext as MainViewModel).HamburgerMenuIndex = e.ClickedItem;
         }
 
-
+        private void OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e) {
+            vm.ButtonSpammerVM.ButtonPressCaptured(e.Key);
+        }
     }
 }

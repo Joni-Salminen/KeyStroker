@@ -7,15 +7,17 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:Binding="clr-namespace:KeyStroker.UI.Utils"
         xmlns:Tabs="clr-namespace:KeyStroker.UI.UserControls.Tabs"
-        xmlns:resx="clr-namespace:KeyStroker.UI.Properties"         
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:resx="clr-namespace:KeyStroker.UI.Properties" 
+        xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+        Dialog:DialogParticipation.Register="{Binding ButtonSpammerVM}"
+        Title="MainWindow" Height="450" Width="800" KeyDown="OnKeyDown">
 
     <mah:MetroWindow.Resources>
         <Binding:BindingProxy x:Key="proxy" DataContext="{Binding}"/>
     </mah:MetroWindow.Resources>
 
     <Grid Margin="0">
-        <mah:HamburgerMenu HamburgerMargin="10" Foreground="White"  IsPaneOpen="False" x:Name="HamburgerMenu" CompactPaneLength="150" OpenPaneLength="150"
+        <mah:HamburgerMenu HamburgerMargin="10" Foreground="White"  IsPaneOpen="False" x:Name="HamburgerMenu" CompactPaneLength="50" OpenPaneLength="175"
                                 ItemTemplate="{StaticResource ResourceKey=MenuItemTemplate}"
                                 OptionsItemTemplate="{StaticResource ResourceKey=MenuItemTemplate}"
                                 ContentTemplate="{StaticResource ResourceKey=ContentTemplate}"
@@ -41,13 +43,6 @@
                         </mah:HamburgerMenuIconItem.Tag>
                     </mah:HamburgerMenuIconItem>
 
-                    <!-- Macro Manager -->
-                    <mah:HamburgerMenuIconItem Label="MacroMan" Icon="{StaticResource ResourceKey=icon_keyboard}">
-                        <mah:HamburgerMenuIconItem.Tag>
-                            <Tabs:MacroManager></Tabs:MacroManager>
-                        </mah:HamburgerMenuIconItem.Tag>
-                    </mah:HamburgerMenuIconItem>
-                    
                 </mah:HamburgerMenuItemCollection>
             </mah:HamburgerMenu.ItemsSource>
 
