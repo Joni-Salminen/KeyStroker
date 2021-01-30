@@ -24,13 +24,13 @@ namespace KeyStroker.FileSavingTests
         public async Task CanSaveAndReadFile()
         {
             // Create new keyList and assign values to it and save it
-            List<Key> keyList = new List<Key>();
-            keyList.Add(new Key('a', 100));
-            keyList.Add(new Key('b', 200));
+            List<ProgrammableButton> keyList = new List<ProgrammableButton>();
+            keyList.Add(new ProgrammableButton('a', 100));
+            keyList.Add(new ProgrammableButton('b', 200));
             bool ok = await FileWriter.SaveFile(keyList);
 
             // Create another keyList and read it from a file
-            List<Key> keyList1;
+            List<ProgrammableButton> keyList1;
             keyList1 = await FileWriter.ReadFile();
 
             bool expected = true;

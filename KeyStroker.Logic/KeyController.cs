@@ -8,7 +8,7 @@ namespace KeyStroker.Logic
 {
     public class KeyController
     {
-        public List<Key> keyList = new List<Key>();
+        public List<ProgrammableButton> keyList = new List<ProgrammableButton>();
         private bool _isTimersRunning = false;
 
         public bool isTimersRunning() => _isTimersRunning;
@@ -17,12 +17,12 @@ namespace KeyStroker.Logic
             if (interval <= 5)
                 return false;
             
-            keyList.Add(new Key(key, interval));
+            keyList.Add(new ProgrammableButton(key, interval));
             return true;
         }
         public void startAllTimers()
         {
-            foreach(Key key in keyList)
+            foreach(ProgrammableButton key in keyList)
             {
                 key.StartTimer();
             }
@@ -30,7 +30,7 @@ namespace KeyStroker.Logic
         }
         public void stopAllTimers()
         {
-            foreach(Key key in keyList)
+            foreach(ProgrammableButton key in keyList)
             {
                 key.StopTimer();
             }

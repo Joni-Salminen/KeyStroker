@@ -10,7 +10,7 @@ namespace KeyStroker.LogicTests
         [TestMethod]
         public void TimeAndButtonProperlySet()
         {
-            Key key = new Key('a', 100);
+            ProgrammableButton key = new ProgrammableButton('a', 100);
 
             char expectedButton = 'a';
             int expectedTime = 100;
@@ -22,7 +22,7 @@ namespace KeyStroker.LogicTests
         [TestMethod]
         public void TimerValueChanged()
         {
-            Key key = new Key('a', 100);
+            ProgrammableButton key = new ProgrammableButton('a', 100);
             key.Time = 50;
 
             int expectedTime = 50;
@@ -33,7 +33,7 @@ namespace KeyStroker.LogicTests
         [TestMethod]
         public void CanTimerRun()
         {
-            Key key = new Key('a', 100);
+            ProgrammableButton key = new ProgrammableButton('a', 100);
             key.StartTimer();
 
             bool expectedOutcome = true;
@@ -44,8 +44,8 @@ namespace KeyStroker.LogicTests
         [TestMethod]
         public void CanOneTimerOfManyRun()
         {
-            Key key1 = new Key('a', 100);
-            Key key2 = new Key('b', 200);
+            ProgrammableButton key1 = new ProgrammableButton('a', 100);
+            ProgrammableButton key2 = new ProgrammableButton('b', 200);
             key1.StartTimer();
             
             bool key1Outcome = true;
@@ -58,8 +58,8 @@ namespace KeyStroker.LogicTests
         [TestMethod]
         public void CanManyTimersRun()
         {
-            Key key1 = new Key('a', 100);
-            Key key2 = new Key('b', 200);
+            ProgrammableButton key1 = new ProgrammableButton('a', 100);
+            ProgrammableButton key2 = new ProgrammableButton('b', 200);
             key1.StartTimer();
             key2.StartTimer();
 
@@ -73,7 +73,7 @@ namespace KeyStroker.LogicTests
         [TestMethod]
         public void CanTimerBeStopped()
         {
-            Key key = new Key('a', 100);
+            ProgrammableButton key = new ProgrammableButton('a', 100);
             key.StartTimer();
             key.StopTimer();
 

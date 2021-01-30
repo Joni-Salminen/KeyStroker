@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Key.cs" />
+    <Compile Include="ProgrammableButton.cs" />
     <Compile Include="KeyController.cs" />
     <Compile Include="Wrappers\SendKeysWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

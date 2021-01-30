@@ -7,11 +7,7 @@ namespace KeyStroker.UI.Viewmodels {
     public class ButtonViewmodel : BaseViewmodel {
 
         /* These should come from the datamodel */
-        private Key key;
-        private bool infiniteTimes = false;
-        private bool enabled = true;
-        private long repeatAmount = 0;
-        private long interval = 100;
+        
 
         /* The Button we are focusing on */
 

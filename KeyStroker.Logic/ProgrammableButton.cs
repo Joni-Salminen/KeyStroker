@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Timers;
+using System.Windows.Input;
 
 namespace KeyStroker.Logic
 {
-    public class Key
+    public class ProgrammableButton
     {
-        public Key(char key, double time)
+
+        public Key key { get; set; } =
+        private bool enabled = true;
+        private long repeatAmount = 0;  /* 0 == Infinite */
+        private long interval = 100;
+
+        public ProgrammableButton(char key, double time)
         {
             timer = new Timer(time);
 

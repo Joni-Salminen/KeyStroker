@@ -13,11 +13,11 @@ namespace KeyStroker.FileSaving
         private static string _filePath = "defaultProfile.txt";
 
         public static string SavePath { get { return _filePath; } set { _filePath = value; } }
-        public static async Task<bool> SaveFile(List<Key> keyList)
+        public static async Task<bool> SaveFile(List<ProgrammableButton> keyList)
         {
             string text = "";
 
-            foreach (Key key in keyList)
+            foreach (ProgrammableButton key in keyList)
             {
                 text += key.ToString() + '\n';
             }
@@ -36,9 +36,9 @@ namespace KeyStroker.FileSaving
                 return false;
             }
         }
-        public static async Task<List<Key>> ReadFile()
+        public static async Task<List<ProgrammableButton>> ReadFile()
         {
-            List<Key> keyList = new List<Key>();
+            List<ProgrammableButton> keyList = new List<ProgrammableButton>();
 
             using (StreamReader reader = File.OpenText(_filePath))
             {
@@ -47,7 +47,7 @@ namespace KeyStroker.FileSaving
             };
             return keyList;
         }
-        private static Key CalculateKey(string v)
+        private static ProgrammableButton CalculateKey(string v)
         {
             string[] splitted = v.Split(' ');
             
@@ -58,7 +58,7 @@ namespace KeyStroker.FileSaving
             Double.TryParse(splitted[0], out time);
             Boolean.TryParse(splitted[2], out isEnabled);
 
-            Key key = new Key(button, time);
+            ProgrammableButton key = new ProgrammableButton(button, time);
             key.IsEnabled = isEnabled;
 
             return key;

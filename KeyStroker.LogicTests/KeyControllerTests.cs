@@ -37,7 +37,7 @@ namespace KeyStroker.LogicTests
 
             controller.startAllTimers();
 
-            foreach(Key key in controller.keyList)
+            foreach(ProgrammableButton key in controller.keyList)
             {
                 Assert.AreEqual(true, key.TimerRunning());
             }
@@ -56,7 +56,7 @@ namespace KeyStroker.LogicTests
             controller.startAllTimers();
             controller.stopAllTimers();
 
-            foreach (Key key in controller.keyList)
+            foreach (ProgrammableButton key in controller.keyList)
             {
                 Assert.AreEqual(false, key.TimerRunning());
             }
