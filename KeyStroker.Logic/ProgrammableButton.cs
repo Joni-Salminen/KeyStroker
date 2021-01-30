@@ -8,6 +8,7 @@ namespace KeyStroker.Logic
     {
 
         #region UI uses these indirectly
+        /* Everything does have well known starting state, so we can use parameteless constructor */
         public Key KeyCode { get; set; } = Key.None;
         public bool IsEnabled { get; set; } = true;
         public long RepeatAmount { get; set; } = 0;
@@ -15,7 +16,11 @@ namespace KeyStroker.Logic
         #endregion
 
         /* Empty constructor */
-        public ProgrammableButton() { }
+        public ProgrammableButton() {
+            /* Should prop remove from constructor, since now we create new timer object with default Interval always */
+            timer = new Timer(Interval);
+            timer.Elapsed += Timer_Elapsed;
+        }
 
         public ProgrammableButton(char key, double time)
         {
