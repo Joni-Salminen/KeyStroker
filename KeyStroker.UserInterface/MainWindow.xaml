@@ -35,10 +35,10 @@
                         </mah:HamburgerMenuIconItem.Tag>
                     </mah:HamburgerMenuIconItem>
 
-                    <!-- Key Spammer -->
-                    <mah:HamburgerMenuIconItem Label="KeySpammer" Icon="{StaticResource ResourceKey=icon_keyboard}">
+                    <!-- Button Spammer -->
+                    <mah:HamburgerMenuIconItem Label="ButtonSpammer" Icon="{StaticResource ResourceKey=icon_keyboard}">
                         <mah:HamburgerMenuIconItem.Tag>
-                            <Tabs:KeySpammer DataContext="{Binding DataContext.MacroManagerVM, Source={StaticResource proxy}}"></Tabs:KeySpammer>
+                            <Tabs:KeySpammer DataContext="{Binding DataContext.ButtonSpammerVM, Source={StaticResource proxy}}"></Tabs:KeySpammer>
                         </mah:HamburgerMenuIconItem.Tag>
                     </mah:HamburgerMenuIconItem>
 
