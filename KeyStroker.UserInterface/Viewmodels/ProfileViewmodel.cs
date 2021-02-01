@@ -1,12 +1,12 @@
 ﻿using KeyStroker.Logic.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using KeyStroker.UI.Utils;
 
 namespace KeyStroker.UI.Viewmodels {
-    public class ProfileViewmodel {
+    public class ProfileViewmodel : BaseViewmodel {
 
         private Profile profile;
+
+        public string Name { get => profile.Name; set { profile.Name = value; NotifyPropertyChanged(); } }
 
         public ProfileViewmodel(Profile profile) {
             this.profile = profile;

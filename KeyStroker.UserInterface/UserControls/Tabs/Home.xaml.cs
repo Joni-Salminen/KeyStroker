@@ -22,5 +22,17 @@ namespace KeyStroker.UI.UserControls.Tabs
         {
             InitializeComponent();
         }
+
+      
+
+        private void OnSelectionStarting(object sender, EventArgs e) {
+            Flipper.SelectedIndex = 0;
+        }
+
+        private void OnSelectionEnding(object sender, EventArgs e) {
+            if (ProfileCombo.SelectedItem != null) {
+                Flipper.SelectedIndex = 1;
+            }
+        }
     }
 }
