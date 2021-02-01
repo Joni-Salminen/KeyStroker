@@ -19,7 +19,7 @@ namespace KeyStroker.UI {
             this.HamburgerMenu.Content = e.ClickedItem;
             // close the pane
             this.HamburgerMenu.IsPaneOpen = false;
-            //(DataContext as MainViewModel).HamburgerMenuIndex = e.ClickedItem;
+           
         }
 
         private void OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e) {

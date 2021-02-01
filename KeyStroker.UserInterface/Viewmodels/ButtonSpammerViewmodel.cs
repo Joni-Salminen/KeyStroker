@@ -8,17 +8,19 @@ namespace KeyStroker.UI.Viewmodels
     public class ButtonSpammerViewmodel : BaseViewmodel {
 
         private ProgressDialogController controller;
-        private IDialogCoordinator dialogCordinator;
+        private readonly IDialogCoordinator dialogCordinator;
 
         private BindingList<ButtonViewmodel> _keys;
         private ButtonViewmodel _selButton;
         private ButtonViewmodel _editableButton;
-
         private bool isPopupOpen = false;
+
+        #region Bindable properties
         public BindingList<ButtonViewmodel> Buttons { get => _keys; set { _keys = value; } }
         public ButtonViewmodel SelectedButton { get => _selButton; set { _selButton = value; EditableButton = _selButton; NotifyPropertyChanged(); }}
         public ButtonViewmodel EditableButton { get => _editableButton; set { _editableButton = value; NotifyPropertyChanged(); }}
-        public bool PressAnyPop { get => isPopupOpen; set { isPopupOpen = value; NotifyPropertyChanged(); } } 
+        public bool PressAnyPop { get => isPopupOpen; set { isPopupOpen = value; NotifyPropertyChanged(); } }
+        #endregion
 
         #region Commands
         private BaseAction _set;
@@ -102,7 +104,11 @@ namespace KeyStroker.UI.Viewmodels
         }
         public async void RemoveButton() {
 
+            if(SelectedButton != null) {
+                Buttons.Remove(SelectedButton);
+            }
         }
+
         public async void AddButton() {
 
         }

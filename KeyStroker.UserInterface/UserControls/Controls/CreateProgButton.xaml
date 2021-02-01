@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="KeyStroker.UI.UserControls.Controls.CreateProgButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KeyStroker.UI.UserControls.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="250"
+              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"     
+             Foreground="Black"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid>
+        <GroupBox Header="Create new">
+            <Grid  Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Button to spam, in human readable form -->
+                <TextBox x:Name="text_KeyCode" Text="{Binding SelectedButton.KeyCodeStr, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Key" md:HintAssist.IsFloating="True" md:HintAssist.HelperText="Key to spam" TextWrapping="Wrap"
+                 Margin="10" Grid.Row="0"  Grid.RowSpan="1" Grid.ColumnSpan="2" />
+                <Button x:Name="btn_setNew" Content="Set" Command="{Binding SetNewKey}"
+                Margin="10,10,10,10" Grid.Row="0" Grid.ColumnSpan="1" Grid.Column="2"/>
+
+
+                <!-- Interval slider & label -->
+                <Slider x:Name="slider_Ms" Value="{Binding SelectedButton.Interval, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  TickFrequency="5" Minimum="5" Maximum="10000" 
+                Margin="10,10,10,0" VerticalAlignment="Bottom" Grid.Row="1" Grid.ColumnSpan="3"/>
+                <Label x:Name="label_Ms" Content="{Binding ElementName=slider_Ms, Path=Value}" ContentStringFormat=" {0:#} ms" HorizontalAlignment="Center"
+               Margin="10,5,10,0" VerticalAlignment="Top" Height="24" Grid.Row="1" Grid.ColumnSpan="3"/>
+
+                <!-- Amount slider & label -->
+                <Slider x:Name="slider_repeat" Value="{Binding SelectedButton.RepeatAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.HelperText="0 == Infinity" 
+                        TickFrequency="1" Minimum="0" Maximum="100" 
+                        Margin="10,10,10,10" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom"/>
+                <Label x:Name="label_amount" Content="{Binding ElementName=slider_repeat, Path=Value}" ContentStringFormat=" {0:#} Times" HorizontalAlignment="Center"
+               Margin="10,5,10,0" VerticalAlignment="Top" Height="24" Grid.Row="2" Grid.ColumnSpan="3"/>
+
+                <!-- Is the button spammer enabled for this button -->
+                <CheckBox x:Name="cb_IsEnabled" IsChecked="{Binding SelectedButton.IsEnabled, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Content="Enabled"
+                  Margin="10" Grid.ColumnSpan="3" Grid.Row="3" HorizontalAlignment="Center"/>
+
+                <Button x:Name="btn_save" Content="Save" Command="{Binding Add}"
+                Margin="10,4,10,5"  Grid.Row="4" Grid.ColumnSpan="3"/>
+
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

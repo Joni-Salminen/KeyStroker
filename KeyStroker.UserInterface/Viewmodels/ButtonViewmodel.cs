@@ -11,7 +11,7 @@ namespace KeyStroker.UI.Viewmodels {
         
         /* UI only properties */
         public string KeyCodeStr { get => btn.KeyCode.ToString(); set { } }
-        public bool InfinityTimes { get => (btn.RepeatAmount == 0); set { NotifyPropertyChanged(); } }
+        public bool InfinityTimes { get => (btn.RepeatAmount == 0); set { NotifyPropertyChanged("InfinityTimes"); } }
 
 
         public Key KeyCode {  get => btn.KeyCode; set { btn.KeyCode = value; NotifyPropertyChanged(); NotifyPropertyChanged("KeyCodeStr"); } }

@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="KeyStroker.UI.UserControls.Controls.ExtendedSlider"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:KeyStroker.UI.UserControls.Controls"
+             
+             d:DesignHeight="100" d:DesignWidth="300"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"     
+             Foreground="Black"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ExtendedSlider}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="ValText" Content="{Binding ElementName=ValSlider, Path=Value}"
+               Margin="10,0,0,0" HorizontalContentAlignment="Right" VerticalAlignment="Bottom" Grid.Column="0"/>
+
+        <Label x:Name="UnitText" Content="{Binding ValueUnit}"
+               Margin="0,0,10,0" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" Grid.Column="1"/>
+
+        <Slider x:Name="ValSlider" Value="{Binding CurrentValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl}}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" TickFrequency="{Binding TickAmount}"
+                Margin="10,0,10,0" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" />
+
+        <Label x:Name="HelpText" Content="{Binding HelperText}" Foreground="DarkBlue" FontSize="10"
+               Margin="10,0" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2"/>
+    </Grid>
+</UserControl>

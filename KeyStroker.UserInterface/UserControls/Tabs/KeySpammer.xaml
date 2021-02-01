@@ -9,6 +9,8 @@
              
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:ext="clr-namespace:KeyStroker.UI.UserControls.Controls"
+             
              
              TextElement.FontWeight="Medium"
              TextElement.FontSize="13"
@@ -21,10 +23,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -33,46 +36,50 @@
             <ColumnDefinition Width="125"/>
             <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
-
+          
         <!-- Button grid -->
-        <DataGrid x:Name="ButtonDataGrid" ItemsSource="{Binding Buttons, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedButton}" AutoGenerateColumns="False" Margin="10,10,10,10" Grid.RowSpan="5">
+        <DataGrid x:Name="ButtonDataGrid" ItemsSource="{Binding Buttons, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedButton}"
+                  AutoGenerateColumns="False" Margin="10,10,10,10" Grid.RowSpan="6" HorizontalContentAlignment="Center">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Key" Binding="{Binding KeyCodeStr}" IsReadOnly="True" Width="1*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Interval" Binding="{Binding Interval}" IsReadOnly="True" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Repeat" Binding="{Binding RepeatAmount}" IsReadOnly="True" Width="1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Interval" Binding="{Binding Interval, StringFormat={}{0:#}ms}" IsReadOnly="True" Width="1*"></DataGridTextColumn>
                 <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding IsEnabled}" IsReadOnly="False" Width="1*"></DataGridCheckBoxColumn>
             </DataGrid.Columns>
         </DataGrid>
 
+        <GroupBox Header="Spammer hotkey" 
+            Margin="0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" >
+            <Grid Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Margin="10"/>
+                    <Button Content="Set" Margin="20,31,0,10" Grid.Column="1"></Button>
+            </Grid>
+        </GroupBox>
+        
         <!-- Button to spam, in human readable form -->
         <TextBox x:Name="text_KeyCode" Text="{Binding SelectedButton.KeyCodeStr, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Key" md:HintAssist.IsFloating="True" md:HintAssist.HelperText="Key to spam" TextWrapping="Wrap"
-                 Margin="10,0,10,10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" />
+                 Margin="10,10,10,15" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" />
 
-        <!-- Interval slider & label -->
-        <Slider x:Name="slider_Ms" Value="{Binding SelectedButton.Interval, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  TickFrequency="5" Minimum="0" Maximum="10000" 
-                Margin="10,0,10,0" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <ext:ExtendedSlider CurrentValue="{Binding SelectedButton.Interval, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HelperText="Time in between button presses" TickAmount="5" MinValue="5" MaxValue="500" 
+                            ValueUnit="Milliseconds" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" Margin="0" />
 
-        <Label x:Name="label_Ms" Content="{Binding ms}"
-               Margin="10,0,10,0" VerticalAlignment="Center" Height="24" Grid.Row="2"  Grid.Column="3"/>
+        <ext:ExtendedSlider CurrentValue="{Binding SelectedButton.RepeatAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HelperText="0 is Infinity times" TickAmount="1" MinValue="0" MaxValue="100" 
+                            ValueUnit="Times" Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="1" Margin="0" />
 
         <!-- Is the button spammer enabled for this button -->
         <CheckBox x:Name="cb_IsEnabled" IsChecked="{Binding SelectedButton.IsEnabled, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Content="Enabled"
-                  Margin="10,10,10,0"  Grid.Column="3"  Grid.Row="4" Height="31" VerticalAlignment="Top"/>
+                  Margin="10,10,10,0"  Grid.Column="3"  Grid.Row="5" Height="31" VerticalAlignment="Top"/>
 
-        <TextBox x:Name="text_RepeatAmount" Text="{Binding SelectedButton.RepeatAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap"
-                 md:HintAssist.Hint="Repeat amount" md:HintAssist.IsFloating="True" md:HintAssist.HelperText="0 mean infinitely" 
-                 Grid.Column="1" Grid.Row="3" VerticalAlignment="Top" Margin="10,0,10,0" Grid.ColumnSpan="2" Height="40"/>
-
-        <CheckBox x:Name="cb_Infinitely" Content="Infinitely" IsChecked="{Binding SelectedButton.InfinityTimes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  Margin="10,10,10,10"  Grid.Column="3" Grid.Row="3"/>
-
-        
-        
         <Button x:Name="btn_setNew" Content="Set" Command="{Binding SetNewKey}"
-                Margin="10,0,10,0" Grid.Column="3"  Grid.Row="1" VerticalAlignment="Center"/>
+                Margin="10,0,10,0" Grid.Column="3"  Grid.Row="2" VerticalAlignment="Center"/>
         <Button x:Name="btn_save" Content="Save" Command="{Binding Add}"
-                Margin="10" Grid.Column="3"  Grid.Row="5"/>
+                Margin="10" Grid.Column="3"  Grid.Row="6"/>
         <Button x:Name="btn_remove" Content="Remove" Command="{Binding Remove}"
-                Margin="10" Grid.Column="0"  Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Right" Width="100"/>
+                Margin="0,8,10,0" Grid.Column="0"  Grid.Row="6" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100"/>
 
     </Grid>
 </UserControl>
