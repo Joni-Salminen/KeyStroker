@@ -32,7 +32,7 @@
                     <!-- Home -->
                     <mah:HamburgerMenuIconItem  Label="Home" x:Name="ChatMenuItem" Icon="{StaticResource ResourceKey=icon_home}">
                         <mah:HamburgerMenuIconItem.Tag x:Uid="a">
-                            <Tabs:Home ></Tabs:Home>
+                            <Tabs:Home DataContext="{Binding DataContext, Source={StaticResource proxy}}"></Tabs:Home>
                         </mah:HamburgerMenuIconItem.Tag>
                     </mah:HamburgerMenuIconItem>
 
