@@ -115,7 +115,7 @@ namespace KeyStroker.UI.Viewmodels
         #endregion
 
         public void ButtonPressCaptured(Key KeyCode) {
-            if (controller.IsOpen && isPopupOpen) {
+            if (controller != null && controller.IsOpen && isPopupOpen) {
                 controller.CloseAsync();
                 isPopupOpen = false;
                 EditableButton.KeyCode = KeyCode;
