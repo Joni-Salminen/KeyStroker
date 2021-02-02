@@ -17,7 +17,7 @@
         <md:DialogHost IsOpen="{Binding CreatingNewProfile}">
             <md:DialogHost.DialogContent>
                 <Grid>
-                    <local:CreateProfileDialog ProfileName="{Binding ProfileName}" ActionConfirm="{Binding ActionConfirm}" ActionBack="{Binding ActionBack}" ></local:CreateProfileDialog>
+                    <!-- <local:CreateProfileDialog ProfileName="{Binding ProfileName}" ActionConfirm="{Binding ActionConfirm}" ActionBack="{Binding ActionBack}" ></local:CreateProfileDialog>-->
                 </Grid>
             </md:DialogHost.DialogContent>
             <Grid>
