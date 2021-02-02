@@ -48,18 +48,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <GroupBox Header="Spammer hotkey" 
-            Margin="0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" >
-            <Grid Margin="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" Margin="10"/>
-                    <Button Content="Set" Margin="20,31,0,10" Grid.Column="1"></Button>
-            </Grid>
-        </GroupBox>
-        
         <!-- Button to spam, in human readable form -->
         <TextBox x:Name="text_KeyCode" Text="{Binding SelectedButton.KeyCodeStr, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" md:HintAssist.Hint="Key" md:HintAssist.IsFloating="True" md:HintAssist.HelperText="Key to spam" TextWrapping="Wrap"
                  Margin="10,10,10,15" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" />
