@@ -1,4 +1,5 @@
-﻿using KeyStroker.Logic.Models;
+﻿using KeyStroker.Logic.Hotkeys;
+using KeyStroker.Logic.Models;
 using KeyStroker.UI.Utils;
 using MahApps.Metro.Controls.Dialogs;
 using System;
@@ -9,6 +10,7 @@ using System.Text;
 namespace KeyStroker.UI.Viewmodels {
     public class RootViewmodel : BaseViewmodel {
 
+        private GlobalHotkeyListener listener;
         private ObservableCollection<ProfileViewmodel> profiles = new ObservableCollection<ProfileViewmodel>();
         private IDialogCoordinator dialogCordinator;
         private ButtonSpammerViewmodel _buttonSpammerVm;
@@ -16,6 +18,8 @@ namespace KeyStroker.UI.Viewmodels {
         private bool isFlipped = false;
         private string newProfileName;
         private ProfileViewmodel currentProfile;
+
+        #region Actions
 
         private BaseAction createNewProfile;
         private BaseAction actionConfirm;
@@ -43,6 +47,8 @@ namespace KeyStroker.UI.Viewmodels {
             set { actionBack = value; }
         }
 
+        #endregion
+
         public string ProfileName { get => newProfileName; set { newProfileName = value; NotifyPropertyChanged(); } }
         public bool CreatingNewProfile { get => creatingNewProfile; set { creatingNewProfile = value; NotifyPropertyChanged(); } }
         public bool IsFlipped { get => isFlipped; set { isFlipped = value; NotifyPropertyChanged(); }}
@@ -56,6 +62,15 @@ namespace KeyStroker.UI.Viewmodels {
             ButtonSpammerVM = new ButtonSpammerViewmodel(dialogCordinator);
             Profiles.Add(new ProfileViewmodel(new Profile("Just a Test")));
             Profiles.Add(new ProfileViewmodel(new Profile("Another one")));
+            listener = GlobalHotkeyListener.Instance;
+            listener.OnHotketDetected += OnHotkeyDetected;
+        }
+
+        private void OnHotkeyDetected(HotkeyEventArgs e) {
+
+
+
+           
         }
 
         private async void CreateNew() {
