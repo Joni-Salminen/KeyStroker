@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows.Input;
 using System.Windows.Interop;
 
 namespace KeyStroker.Logic {
@@ -12,7 +13,7 @@ namespace KeyStroker.Logic {
         public static GlobalHotkeyListener Instance { get { return instance.Value; } }
 
         private GlobalHotkeyListener() {
-            if (handle == null)
+            if (handle == IntPtr.Zero)
                 handle = Process.GetCurrentProcess().MainWindowHandle;
         }
 
@@ -46,8 +47,9 @@ namespace KeyStroker.Logic {
         /// <param name="modifiers">Keys that must be pressed in combination with the key</param>
         /// <param name="key"> Virtual-key code of the hotkey </param>
         /// <returns></returns>
-        public bool RegisterHotKey(int id, uint modifiers, uint key) {
-            return RegisterHotKey(source.Handle, id, modifiers, key);
+        public bool RegisterHotKey(int id, ModifierKeys modifiers, Key key) {
+            //return RegisterHotKey(source.Handle, id, modifiers, key);
+            return false;
         }
 
         /// <summary>
@@ -61,5 +63,4 @@ namespace KeyStroker.Logic {
 
 
     }
-}
 }

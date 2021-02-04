@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="BackgroundKeyListener.cs" />
     <Compile Include="GlobalHotkeyListener.cs" />
+    <Compile Include="Hotkey.cs" />
+    <Compile Include="KeyEnum.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="ProgrammableButton.cs" />
     <Compile Include="KeyController.cs" />
