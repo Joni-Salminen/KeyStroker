@@ -1,10 +1,10 @@
-﻿using KeyStroker.Logic.Models;
+﻿using KeyStroker.Logic;
+using KeyStroker.Logic.Models;
 using KeyStroker.UI.Utils;
 using MahApps.Metro.Controls.Dialogs;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.Diagnostics;
+using System.Windows.Input;
 
 namespace KeyStroker.UI.Viewmodels {
     public class RootViewmodel : BaseViewmodel {
@@ -16,11 +16,13 @@ namespace KeyStroker.UI.Viewmodels {
         private bool isFlipped = false;
         private string newProfileName;
         private ProfileViewmodel currentProfile;
+        private GlobalHotkeyListener hotkeyListener;
 
+
+        #region Actions 
         private BaseAction createNewProfile;
         private BaseAction actionConfirm;
         private BaseAction actionBack;
-
         public BaseAction CreateNewProfile {
             get {
                 createNewProfile = new BaseAction(CreateNew);
@@ -42,6 +44,7 @@ namespace KeyStroker.UI.Viewmodels {
             }
             set { actionBack = value; }
         }
+        #endregion
 
         public string ProfileName { get => newProfileName; set { newProfileName = value; NotifyPropertyChanged(); } }
         public bool CreatingNewProfile { get => creatingNewProfile; set { creatingNewProfile = value; NotifyPropertyChanged(); } }
@@ -56,6 +59,33 @@ namespace KeyStroker.UI.Viewmodels {
             ButtonSpammerVM = new ButtonSpammerViewmodel(dialogCordinator);
             Profiles.Add(new ProfileViewmodel(new Profile("Just a Test")));
             Profiles.Add(new ProfileViewmodel(new Profile("Another one")));
+            hotkeyListener = GlobalHotkeyListener.Instance;
+            hotkeyListener.OnHotkeyPressed += OnHotkeyDetected;
+
+        }
+
+        // LEFT ALT 120 == 0001   
+        // CTRL 118 == 0002
+        // Shift 116 == 0004
+        // WIN xx == 0008
+        private void OnHotkeyDetected(System.IntPtr param) {
+    /*
+            var test1 = param.ToInt32() & 0xFFFF;
+            if ((test1 & 0x0001) == 0x0001) {
+                Debug.WriteLine("Alt was held down");
+            }
+            else if ((test1 & 0x0002) == 0x0002) {
+                Debug.WriteLine("CTRL was held down");
+            } else {
+                Debug.WriteLine("Alt or CTRL was not held down");
+            }
+
+            var key = param.ToInt32() >> 16;
+            var mod = param.ToInt32() & 0xFFFF;
+            var test = KeyInterop.KeyFromVirtualKey(key);
+            var test2 = KeyInterop.KeyFromVirtualKey(mod);
+
+    */
         }
 
         private async void CreateNew() {
