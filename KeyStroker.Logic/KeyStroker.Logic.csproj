@@ -45,9 +45,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hotkey\GlobalHotkeyListener.cs" />
-    <Compile Include="Hotkey\WinHotkey.cs" />
-    <Compile Include="Hotkey\HotkeyModifier.cs" />
+    <Compile Include="BackgroundKeyListener.cs" />
+    <Compile Include="GlobalHotkeyListener.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="ProgrammableButton.cs" />
     <Compile Include="KeyController.cs" />

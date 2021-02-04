@@ -1,45 +1,35 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 
 namespace KeyStroker.Logic {
-
     public sealed class GlobalHotkeyListener {
 
-        public delegate void HotkeyPressed(IntPtr param);
         public event HotkeyPressed OnHotkeyPressed;
 
         private static readonly Lazy<GlobalHotkeyListener> instance = new Lazy<GlobalHotkeyListener>(() => new GlobalHotkeyListener());
         public static GlobalHotkeyListener Instance { get { return instance.Value; } }
 
-        private GlobalHotkeyListener() {}
-
-        /* TODO, get rid of this */
-        public bool SetWindowHandle(IntPtr wHandle) {
-            this.handle = wHandle;
-            if (handle == IntPtr.Zero)
-                return false;
-            source = HwndSource.FromHwnd(handle);
-            source.AddHook(WndProc);
-            return true;
+        private GlobalHotkeyListener() {
+            if (handle == null)
+                handle = Process.GetCurrentProcess().MainWindowHandle;
         }
 
-
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
-
-            if(hwnd == handle) {
-                switch (msg) {
-                    case WM_HOTKEY: {
-                            OnHotkeyPressed?.Invoke(lParam);
-                            break;
-                        }
-                }
+            switch (msg) {
+                case WM_HOTKEY: {
+                        System.Windows.MessageBox.Show("");
+                        OnHotkeyPressed?.Invoke();
+                        break;
+                    }
             }
+
             return IntPtr.Zero;
         }
 
         private const int WM_HOTKEY = 0x312;
-        private IntPtr handle = IntPtr.Zero;
+        IntPtr handle;
         HwndSource source;
 
         #region DLLIMPORTS
@@ -56,7 +46,7 @@ namespace KeyStroker.Logic {
         /// <param name="modifiers">Keys that must be pressed in combination with the key</param>
         /// <param name="key"> Virtual-key code of the hotkey </param>
         /// <returns></returns>
-        public bool RegisterHotKey(int id, uint modifiers, uint key) {          
+        public bool RegisterHotKey(int id, uint modifiers, uint key) {
             return RegisterHotKey(source.Handle, id, modifiers, key);
         }
 
@@ -71,4 +61,5 @@ namespace KeyStroker.Logic {
 
 
     }
+}
 }

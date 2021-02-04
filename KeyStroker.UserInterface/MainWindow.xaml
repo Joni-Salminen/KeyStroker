@@ -10,7 +10,7 @@
         xmlns:resx="clr-namespace:KeyStroker.UI.Properties" 
         xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         Dialog:DialogParticipation.Register="{Binding ButtonSpammerVM}"
-        Title="MainWindow" Height="525" Width="800" KeyDown="OnKeyDown" SourceInitialized="OnHwndReady">
+        Title="MainWindow" Height="525" Width="800" KeyDown="OnKeyDown">
 
     <mah:MetroWindow.Resources>
         <Binding:BindingProxy x:Key="proxy" DataContext="{Binding}"/>
