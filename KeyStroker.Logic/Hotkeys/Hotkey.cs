@@ -27,13 +27,13 @@ namespace KeyStroker.Logic.Hotkeys {
             uint retval = 0x0;
 
             if (_modifiers == ModifierKeys.Alt)
-                retval += (uint)ModifierList.ALT;
+                retval += (uint)HotkeyModifier.ALT;
             if (_modifiers == ModifierKeys.Control)
-                retval += (uint)ModifierList.CTRL;
+                retval += (uint)HotkeyModifier.CTRL;
             if (_modifiers == ModifierKeys.Shift)
                 retval += (uint)ModifierKeys.Shift;
             if (_modifiers == ModifierKeys.Windows)
-                retval += (uint)ModifierList.WIN;
+                retval += (uint)HotkeyModifier.WIN;
             return retval;
         }
 

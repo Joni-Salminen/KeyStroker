@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KeyStroker.Logic</RootNamespace>
     <AssemblyName>KeyStroker.Logic</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +35,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -47,8 +49,9 @@
   <ItemGroup>
     <Compile Include="Hotkeys\GlobalHotkeyListener.cs" />
     <Compile Include="Hotkeys\Hotkey.cs" />
+    <Compile Include="Hotkeys\HotkeyConverter.cs" />
     <Compile Include="Hotkeys\HotkeyEventArgs.cs" />
-    <Compile Include="KeyEnum.cs" />
+    <Compile Include="Hotkeys\HotkeyModifier.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="ProgrammableButton.cs" />
     <Compile Include="KeyController.cs" />
