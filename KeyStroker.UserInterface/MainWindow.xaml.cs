@@ -2,15 +2,16 @@
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows;
+using KeyStroker.Logic.Hotkeys;
 using System.Windows.Interop;
-using KeyStroker.Logic;
+using System;
 
 namespace KeyStroker.UI {
 
     public partial class MainWindow : MetroWindow {
 
         RootViewmodel vm;
-        BackgroundKeyListener listener;
+        GlobalHotkeyListener hotKeyListener;
         public MainWindow() {
             InitializeComponent();
             HamburgerMenu.SelectedIndex = 0;
@@ -20,9 +21,12 @@ namespace KeyStroker.UI {
             Loaded += MainWindow_Loaded;
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            listener = new BackgroundKeyListener(new WindowInteropHelper(this).Handle);
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
+
+            IntPtr windowHandle = new WindowInteropHelper(this).Handle;
+            hotKeyListener = GlobalHotkeyListener.Instance;
+            hotKeyListener.SetWindowHandle(windowHandle);
+
         }
 
         private void HamburgerMenu_ItemClick(object sender, MahApps.Metro.Controls.ItemClickEventArgs e) {

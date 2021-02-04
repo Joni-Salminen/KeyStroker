@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace KeyStroker.Logic
-{
+namespace KeyStroker.Logic.Hotkeys {
     public class Hotkey
     {
         public Hotkey(Key key, ModifierKeys modifiers)

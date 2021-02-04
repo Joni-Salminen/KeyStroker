@@ -4,28 +4,41 @@ using System.Runtime.InteropServices;
 using System.Windows.Input;
 using System.Windows.Interop;
 
-namespace KeyStroker.Logic {
+namespace KeyStroker.Logic.Hotkeys {
     public sealed class GlobalHotkeyListener {
 
-        public event HotkeyPressed OnHotkeyPressed;
+        public delegate void HotkeyDetected(HotkeyEventArgs);
+        public event HotkeyDetected OnHotketDetected;
+        
 
         private static readonly Lazy<GlobalHotkeyListener> instance = new Lazy<GlobalHotkeyListener>(() => new GlobalHotkeyListener());
         public static GlobalHotkeyListener Instance { get { return instance.Value; } }
 
-        private GlobalHotkeyListener() {
+        private GlobalHotkeyListener() {      
             if (handle == IntPtr.Zero)
                 handle = Process.GetCurrentProcess().MainWindowHandle;
+        }
+
+        public bool SetWindowHandle(IntPtr wHandle) {
+            this.handle = wHandle;
+            if(handle != IntPtr.Zero) {
+                source = HwndSource.FromHwnd(handle);
+                source.AddHook(WndProc);
+
+                return true;
+            }
+            return false;
+
+
         }
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
             switch (msg) {
                 case WM_HOTKEY: {
-                        System.Windows.MessageBox.Show("");
-                        OnHotkeyPressed?.Invoke();
+                        OnHotketDetected?.Invoke(new HotkeyEventArgs(lParam));
                         break;
                     }
             }
-
             return IntPtr.Zero;
         }
 
